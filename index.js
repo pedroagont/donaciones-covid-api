@@ -17,6 +17,7 @@ app.get('/doc', function(req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
 });
 
+app.use('/api/v1', require('./router'));
 
 // Encender el servidor
 app.listen(PORT, () => console.log(`Servidor en puerto ${PORT}`));
