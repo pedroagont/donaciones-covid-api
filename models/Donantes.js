@@ -1,25 +1,26 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const DonantesSchema = new schema({
+const DonantesSchema = new Schema({
     nombre: {
         type: String,
-        require: true,
+        required: true,
     },
     correo: {
         type: String,
-        require: true,
+        required: true,
     },
     ciudad: {
         type: String,
-        require: true,
+        required: true,
     },
     pais: {
         type: String,
-        require: true,
+        required: true,
     },
     donaciones: {
         type: Number,
+        required: true,
         default: 0,
     },
 })

@@ -1,32 +1,37 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const HospitalesSchema = new schema({
-    nombre: {
+const HospitalesSchema = new Schema({
+    nombrehospital: {
         type: String,
-        require: true,
+        required: true,
     },
     ciudad: {
         type: String,
-        require: true,
+        required: true,
     },
     pais: {
         type: String,
-        require: true,
+        required: true,
     },
     nombredelcontacto: {
         type: String,
-        require: true,
+        required: true,
     },
     telefonodelcontacto: {
         type: Number,
-        require: true,
+        required: true,
     },
     correodelcontacto: {
         type: String,
-        require: true,
-    }
-})
+        required: true,
+    },
+    articulos: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Articulos',
+        required: true,
+    }],
+});
 
 const Hospitales = mongoose.model('Hospitales', HospitalesSchema);
 module.exports = Hospitales;

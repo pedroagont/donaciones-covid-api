@@ -39,7 +39,7 @@ router.patch('/api/v1/articulos/:id', (req, res) => {
 //deleted articles
 router.delete('/api/v1/articulos/:id', (req, res) => {
     Articulos.findByIdAndDelete(req.params.id)
-        .then(() => res.status(204).json({ mensaje: 'El articulo ha sido borrado' }))
+        .then(() => res.status(204).json())
         .catch(err => res.status(404).json(err));
 });
 
