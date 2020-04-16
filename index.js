@@ -13,7 +13,7 @@ app.use(cors());
 app.get('/', (req, res) => res.json('¡Bienvenido!'));
 
 // viewed at http://localhost:4080
-app.get('/docs', function(req, res) {
+app.get('/doc', function(req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
 });
 
