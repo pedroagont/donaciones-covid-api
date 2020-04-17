@@ -18,7 +18,7 @@ const DonantesSchema = new Schema({
         type: String,
         required: true,
     },
-    donaciones: {
+    donacion: {
         type: Number,
         required: true,
         default: 0,

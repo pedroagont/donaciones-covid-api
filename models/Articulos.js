@@ -10,6 +10,7 @@ const ArticulosSchema = new Schema({
         type: Number,
         required: true,
     },
+
 });
 
 const Articulos = mongoose.model('Articulos', ArticulosSchema);
