@@ -26,11 +26,19 @@ const HospitalesSchema = new Schema({
         type: String,
         required: true,
     },
-    articulos: [{
-        type: mongoose.Schema.Types.ObjectId,
+    articulos: {
+        type: [mongoose.Schema.Types.ObjectId],
         ref: 'Articulos',
         required: true,
-    }],
+    },
+    monto: {
+        type: Number,
+        default: 0,
+    }
+    /* articulo: {
+         type: String,
+         required: true,
+     },*/
 });
 
 const Hospitales = mongoose.model('Hospitales', HospitalesSchema);

@@ -21,7 +21,7 @@ router.get('/api/v1/hospitales', (req, res) => {
         .catch(err => res.status(400).json(err));
 });
 
-//read hospitales
+//read hospital
 router.get('/api/v1/hospitales/:id', (req, res) => {
     Hospitales.findById(req.params.id)
         .then(hospital => res.status(200).json(hospital))
