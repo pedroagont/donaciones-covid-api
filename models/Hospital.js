@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const HospitalesSchema = new Schema({
+const HospitalSchema = new Schema({
     nombrehospital: {
         type: String,
         required: true,
@@ -41,5 +41,5 @@ const HospitalesSchema = new Schema({
      },*/
 });
 
-const Hospitales = mongoose.model('Hospitales', HospitalesSchema);
-module.exports = Hospitales;
+const Hospital = mongoose.model('Hospital', HospitalSchema);
+module.exports = Hospital;
