@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const Articulos = require('../models/Articulos');
+const Articulos = require('../models/Articulo');
 // CRUD Articulos
 
 //create article

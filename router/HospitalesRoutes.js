@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-const Articulos = require('../models/Hospitales');
-const Hospitales = require('../models/Hospitales');
+const Articulos = require('../models/Articulo');
+const Hospitales = require('../models/Hospital');
 // CRUD Hospitales
 
 //create hospital
@@ -58,15 +58,15 @@ router.delete('/api/v1/hospitales/:id', (req, res) => {
 router.get('/api/v1/hospitales/:id/calcular', async(req, res) => {
     Hospitales.findById(req.params.id)
         .then(hospital => {
-            var contenido = hospital.cantidadCubrebocas;
-            var contenido1 = hospital.cantidadJabon;
-            var contenido2 = hospital.cantidadGel;
-            var contenido3 = hospital.cantidadGuantes;
-            var totalCubre = contenido * 10;
-            var totalJabon = contenido1 * 35;
-            var totalGel = contenido2 * 80;
-            var totalGuantes = contenido3 * 15;
-            let monto = totalCubre + totalJabon + totalGel + totalGuantes;
+            let Cubrebocas = hospital.cantidadCubrebocas;
+            let Jabon = hospital.cantidadJabon;
+            let Gel = hospital.cantidadGel;
+            let Guantes = hospital.cantidadGuantes;
+            let totalCubrebocas = Cubrebocas * 10;
+            let totalJabon = Jabon * 35;
+            let totalGel = Gel * 80;
+            let totalGuantes = Guantes * 15;
+            let monto = totalCubrebocas + totalJabon + totalGel + totalGuantes;
             Hospitales.findByIdAndUpdate(req.params.id, { monto }, { new: true })
                 .then(actualizado => {
                     res.status(200).json(actualizado)
