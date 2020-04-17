@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const ArticulosSchema = new Schema({
+const ArticuloSchema = new Schema({
     nombre: {
         type: String,
         required: true,
@@ -13,6 +13,6 @@ const ArticulosSchema = new Schema({
 
 });
 
-const Articulos = mongoose.model('Articulos', ArticulosSchema);
+const Articulo = mongoose.model('Articulo', ArticuloSchema);
 
-module.exports = Articulos;
+module.exports = Articulo;

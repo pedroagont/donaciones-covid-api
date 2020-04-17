@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 const Donantes = require('../models/Donante');
 const Hospitales = require('../models/Hospital');
@@ -44,24 +44,24 @@ router.delete('/api/v1/donantes/:id', (req, res) => {
         .catch(err => res.status(404).json(err));
 });
 
-//calcular  y actualizar la donacion de hospital 
+//calcular  y actualizar la donacion de hospital
 router.get('/api/v1/donantes/:idDonante/hospitales/:idHospital', (req, res) => {
     Donantes.findById(req.params.idDonante)
         .then(donante => {
-            var Cantidad = donante.donacion;
-            console.log(`obtengo donacion=${Cantidad}`);
+            let cantidad = donante.donacion;
+            console.log(`obtengo donacion=${cantidad}`);
             Hospitales.findById(req.params.idHospital)
                 .then(hospital => {
-                    var getDonaciones = hospital.donaciones;
-                    var donaciones = getDonaciones + Cantidad;
+                    let getDonaciones = hospital.donaciones;
+                    let donaciones = getDonaciones + cantidad;
                     console.log(`Actualizo donacion=${donaciones}`);
-                    var getporcentaje = hospital.porcentaje;
+                    let getporcentaje = hospital.porcentaje;
                     //      console.log(`obtengo porcentaje=${getporcentaje}`);
-                    var getmonto = hospital.monto;
+                    let getmonto = hospital.monto;
                     console.log(`obtengo la cantidad que necesita=${getmonto}`);
-                    var porcentaje = (donaciones * 100) / getmonto;
+                    let porcentaje = (donaciones * 100) / getmonto;
                     console.log(`calculo su porcentaje=${porcentaje}`);
-                    //    var porcentaje = calcularporcentaje + getporcentaje;
+                    //    let porcentaje = calcularporcentaje + getporcentaje;
                     //   console.log(`actualizo porcentaje=${porcentaje}`);
                     Hospitales.findByIdAndUpdate(req.params.idHospital, { donaciones, porcentaje }, { new: true })
                         .then(actualizado => {
