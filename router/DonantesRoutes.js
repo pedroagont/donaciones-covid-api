@@ -6,14 +6,14 @@ const Hospitales = require('../models/Hospital');
 // CRUD Donantes
 
 //create Donante
-router.post('/api/v1/donantes', (req, res) => {
+router.post('/donantes', (req, res) => {
     Donantes.create(req.body)
         .then(Donante => res.status(201).json(Donante))
         .catch(err => res.status(400).json(err));
 });
 
 // read Donantes
-router.get('/api/v1/donantes', (req, res) => {
+router.get('/donantes', (req, res) => {
     Donantes.find()
         .then(Donantes => {
             if (Donantes.length === 0) res.status(200).json({ mensaje: 'No hay Donantes en este momento' });
@@ -23,7 +23,7 @@ router.get('/api/v1/donantes', (req, res) => {
 });
 
 //read Donante
-router.get('/api/v1/donantes/:id', (req, res) => {
+router.get('/donantes/:id', (req, res) => {
     Donantes.findById(req.params.id)
         .then(Donante => res.status(200).json(Donante))
         .catch(err => res.status(404).json(err));
@@ -31,21 +31,21 @@ router.get('/api/v1/donantes/:id', (req, res) => {
 
 
 //modify Donante
-router.patch('/api/v1/donantes/:id', (req, res) => {
+router.patch('/donantes/:id', (req, res) => {
     Donantes.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .then(Donante => res.status(200).json(Donante))
         .catch(err => res.status(404).json(err));
 });
 
 //deleted Donante
-router.delete('/api/v1/donantes/:id', (req, res) => {
+router.delete('/donantes/:id', (req, res) => {
     Donantes.findByIdAndDelete(req.params.id)
         .then(() => res.status(204).json())
         .catch(err => res.status(404).json(err));
 });
 
 //calcular  y actualizar la donacion de hospital
-router.get('/api/v1/donantes/:idDonante/hospitales/:idHospital', (req, res) => {
+router.get('/donantes/:idDonante/hospitales/:idHospital', (req, res) => {
     Donantes.findById(req.params.idDonante)
         .then(donante => {
             let cantidad = donante.donacion;
