@@ -43,7 +43,7 @@ router.delete('/hospitales/:id', (req, res) => {
 });
 
 //calcular
-router.get('/api/v1/hospitales/:id/calcular', async(req, res) => {
+router.get('/hospitales/:id/calcular', async(req, res) => {
     Hospitales.findById(req.params.id)
         .then(hospital => {
             let cubrebocas = hospital.cantidadCubrebocas;
