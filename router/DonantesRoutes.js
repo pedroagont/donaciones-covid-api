@@ -46,30 +46,32 @@ router.delete('/donantes/:id', (req, res) => {
 
 //calcular  y actualizar la donacion de hospital
 router.get('/donantes/:idDonante/hospitales/:idHospital', (req, res) => {
-    Donantes.findById(req.params.idDonante)
-        .then(donante => {
-            let cantidad = donante.donacion;
-            console.log(`obtengo donacion=${cantidad}`);
-            Hospitales.findById(req.params.idHospital)
-                .then(hospital => {
-                    let getDonaciones = hospital.donaciones;
-                    let donaciones = getDonaciones + cantidad;
-                    console.log(`Actualizo donacion=${donaciones}`);
-                    let getporcentaje = hospital.porcentaje;
-                    //      console.log(`obtengo porcentaje=${getporcentaje}`);
-                    let getmonto = hospital.monto;
-                    console.log(`obtengo la cantidad que necesita=${getmonto}`);
-                    let porcentaje = (donaciones * 100) / getmonto;
-                    console.log(`calculo su porcentaje=${porcentaje}`);
-                    //    let porcentaje = calcularporcentaje + getporcentaje;
-                    //   console.log(`actualizo porcentaje=${porcentaje}`);
-                    Hospitales.findByIdAndUpdate(req.params.idHospital, { donaciones, porcentaje }, { new: true })
-                        .then(actualizado => {
-                            res.status(200).json(actualizado)
-                        })
+    const obtenerDonacion = req.body.donacion;
+    console.log(`Obtengo la donacion ${obtenerDonacion}`);
+    Hospitales.findById(req.params.idHospital)
+        .then(hospital => {
+            let getDonaciones = hospital.donaciones;
+            let donaciones = getDonaciones + obtenerDonacion;
+            console.log(`Actualizo donacion=${donaciones}`);
+            let getmonto = hospital.monto;
+            console.log(`obtengo la cantidad que necesita=${getmonto}`);
+            let porcentaje = (donaciones * 100) / getmonto;
+            console.log(`calculo su porcentaje=${porcentaje}`);
+            Hospitales.findByIdAndUpdate(req.params.idHospital, { donaciones, porcentaje }, { new: true })
+                .then(actualizado => {
+                    res.status(200).json(actualizado);
+                })
+            Donantes.findById(req.params.idDonante)
+                .then(donante => {
+                    let Ddonaciones = donante.Ddonaciones;
+                    console.log(`aqui obtengo la donacion en Donantes: ${Ddonaciones}`)
+                    Ddonaciones = Ddonaciones + obtenerDonacion;
+                    console.log(`aqui actualizo Donantes ${Ddonaciones}`)
+                    Donantes.findByIdAndUpdate(req.params.idDonante, { Ddonaciones }, { new: true })
+
                 })
         })
-
+        .catch(err => res.status(404).json(err));
 });
 
 module.exports = router;

@@ -20,7 +20,10 @@ const DonanteSchema = new Schema({
     },
     donacion: {
         type: Number,
-        required: true,
+        default: 0,
+    },
+    Ddonaciones: {
+        type: Number,
         default: 0,
     },
 })
