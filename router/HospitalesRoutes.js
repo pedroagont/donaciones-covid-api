@@ -6,7 +6,7 @@ const Hospitales = require('../models/Hospital');
 // CRUD Hospitales
 
 //create hospital
-router.post('/api/v1/hospitales', (req, res) => {
+router.post('/hospitales', (req, res) => {
     Hospitales.create(req.body)
         .then(hospital => {
             let Cubrebocas = hospital.cantidadCubrebocas;
@@ -33,7 +33,7 @@ router.post('/api/v1/hospitales', (req, res) => {
 });
 
 // read hospitales
-router.get('/api/v1/hospitales', (req, res) => {
+router.get('/hospitales', (req, res) => {
     Hospitales.find()
         .then(hospitales => {
             if (hospitales.length === 0) res.status(200).json({ mensaje: 'No hay hospitales en este momento' });
@@ -43,7 +43,7 @@ router.get('/api/v1/hospitales', (req, res) => {
 });
 
 //read hospital
-router.get('/api/v1/hospitales/:id', (req, res) => {
+router.get('/hospitales/:id', (req, res) => {
     Hospitales.findById(req.params.id)
         .then(hospital => res.status(200).json(hospital))
         .catch(err => res.status(404).json(err));
@@ -51,21 +51,21 @@ router.get('/api/v1/hospitales/:id', (req, res) => {
 
 
 //modify hospital
-router.patch('/api/v1/hospitales/:id', (req, res) => {
+router.patch('/hospitales/:id', (req, res) => {
     Hospitales.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .then(hospital => res.status(200).json(hospital))
         .catch(err => res.status(404).json(err));
 });
 
 //deleted hospital
-router.delete('/api/v1/hospitales/:id', (req, res) => {
+router.delete('/hospitales/:id', (req, res) => {
     Hospitales.findByIdAndDelete(req.params.id)
         .then(() => res.status(204).json())
         .catch(err => res.status(404).json(err));
 });
 
 //calcular 
-router.get('/api/v1/hospitales/:id/calcular', async(req, res) => {
+router.get('/hospitales/:id/calcular', async(req, res) => {
     Hospitales.findById(req.params.id)
         .then(hospital => {
             let Cubrebocas = hospital.cantidadCubrebocas;
