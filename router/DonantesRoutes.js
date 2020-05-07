@@ -59,16 +59,15 @@ router.get('/donantes/:idDonante/hospitales/:idHospital', (req, res) => {
             console.log(`calculo su porcentaje=${porcentaje}`);
             Hospitales.findByIdAndUpdate(req.params.idHospital, { donaciones, porcentaje }, { new: true })
                 .then(actualizado => {
+                    Donantes.findById(req.params.idDonante)
+                        .then(donante => {
+                            let Ddonaciones = donante.Ddonaciones;
+                            console.log(`aqui obtengo la donacion en Donantes: ${Ddonaciones}`)
+                            Ddonaciones = Ddonaciones + obtenerDonacion;
+                            console.log(`aqui actualizo Donantes ${Ddonaciones}`)
+                            Donantes.findByIdAndUpdate(req.params.idDonante, { Ddonaciones }, { new: true })
+                        })
                     res.status(200).json(actualizado);
-                })
-            Donantes.findById(req.params.idDonante)
-                .then(donante => {
-                    let Ddonaciones = donante.Ddonaciones;
-                    console.log(`aqui obtengo la donacion en Donantes: ${Ddonaciones}`)
-                    Ddonaciones = Ddonaciones + obtenerDonacion;
-                    console.log(`aqui actualizo Donantes ${Ddonaciones}`)
-                    Donantes.findByIdAndUpdate(req.params.idDonante, { Ddonaciones }, { new: true })
-
                 })
         })
         .catch(err => res.status(404).json(err));
